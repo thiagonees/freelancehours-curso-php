@@ -16,6 +16,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+     //Dupla camada...
     protected $fillable = [
         'name',
         'email',
@@ -27,6 +29,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    
     protected $hidden = [
         'password',
         'remember_token',
@@ -37,6 +40,8 @@ class User extends Authenticatable
      *
      * @return array<string, string>
      */
+    
+    // Conversores
     protected function casts(): array
     {
         return [
