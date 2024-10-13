@@ -6,7 +6,6 @@ use App\Actions\ArrangePositions;
 use App\Models\Project;
 use App\Models\Proposal;
 use App\Notifications\NewProposal;
-use App\Notifications\PerdeuMane;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Rule;
 use Livewire\Attributes\Validate;
@@ -27,7 +26,7 @@ class Create extends Component
 
   public bool $agree = false;
 
-  public function save()
+  public function save(): void
   {
     $this->validate();
 
@@ -52,7 +51,7 @@ class Create extends Component
     $this->modal = false;
   }
 
-  public function arrangePositions(Proposal $proposal)
+  public function arrangePositions(Proposal $proposal): void
   {
     $query = DB::select('
             select *, row_number() over (order by hours asc) as newPosition
@@ -66,7 +65,6 @@ class Create extends Component
       $oProposal = Proposal::find($otherProposal->id);
 
       $oProposal->update(['position_status' => 'down']);
-      $oProposal->notify(new PerdeuMane($this->project));
     }
     ArrangePositions::run($proposal->project_id);
   }

@@ -3,13 +3,16 @@
 namespace App\Livewire\Projects;
 
 use App\Models\Project;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Livewire\Component;
 
 class Timer extends Component
 {
   public Project $project;
 
-  public function render()
+  public function render(): View|Factory|Application
   {
     $diff = now()->diff($this->project->ends_at);
 

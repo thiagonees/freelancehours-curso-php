@@ -3,6 +3,10 @@
 namespace App\Livewire\Projects;
 
 use App\Models\Project;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -13,7 +17,7 @@ class Proposals extends Component
 
   public int $qty = 5;
   #[Computed()]
-  public function proposals()
+  public function proposals(): LengthAwarePaginator
   {
     return $this->project->proposals()
       ->orderBy('hours')
@@ -26,14 +30,14 @@ class Proposals extends Component
       ->latest()->first()
       ->created_at->diffForHumans();
   }
-  public function loadMore()
+  public function loadMore(): void
   {
     $this->qty += 5;
   }
   #[On('proposal::created')]
 
 
-  public function render()
+  public function render(): View|Factory|Application
   {
     return view('livewire.projects.proposals');
   }

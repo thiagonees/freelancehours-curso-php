@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 class ArrangePositions
 {
-  public static function run(int $id)
+  public static function run(int $id): void
   {
     DB::update('
         with RankedProposals as (
