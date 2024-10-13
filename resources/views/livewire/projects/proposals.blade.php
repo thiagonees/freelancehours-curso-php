@@ -1,5 +1,1 @@
-<x-proposals
-
-  :proposals="$this->proposals"
-
-/>
+<x-proposals :proposals="$this->proposals" />
